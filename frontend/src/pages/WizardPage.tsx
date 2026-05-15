@@ -48,7 +48,7 @@ export default function WizardPage() {
             <StepForm step={step} allSteps={wizardSteps} />
           )}
         </main>
-        <RightPanel />
+        {!isBriefStep && <RightPanel />}
       </div>
     </div>
   );

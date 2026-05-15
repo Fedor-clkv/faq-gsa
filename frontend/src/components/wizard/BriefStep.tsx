@@ -45,7 +45,7 @@ export default function BriefStep({ step: _step }: BriefStepProps) {
   };
 
   return (
-    <div className="max-w-2xl mx-auto px-6 py-8 space-y-6">
+    <div className="max-w-5xl mx-auto px-8 py-8 space-y-6">
       <div>
         <div className="flex items-center gap-2 text-xs text-muted-foreground mb-2">
           <span>Шаг 12 / 12</span>
@@ -77,7 +77,7 @@ export default function BriefStep({ step: _step }: BriefStepProps) {
 
       {briefContent && (
         <div className="rounded-lg border border-border bg-card/50">
-          <ScrollArea className="max-h-[60vh] p-6">
+          <ScrollArea className="h-[75vh] p-6">
             <div className="prose prose-sm prose-invert max-w-none text-sm leading-relaxed">
               <ReactMarkdown>{briefContent}</ReactMarkdown>
             </div>

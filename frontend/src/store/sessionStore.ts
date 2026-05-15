@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import type { StepData } from "@/types";
-import { createSession } from "@/api/sessions";
+import { createSession, getSession } from "@/api/sessions";
 
 interface SessionState {
   sessionId: string | null;
@@ -23,7 +23,14 @@ export const useSessionStore = create<SessionState>()(
 
       initSession: async () => {
         const { sessionId } = get();
-        if (sessionId) return;
+        if (sessionId) {
+          try {
+            await getSession(sessionId);
+            return;
+          } catch {
+            set({ sessionId: null });
+          }
+        }
         const res = await createSession();
         set({ sessionId: res.session_id });
       },

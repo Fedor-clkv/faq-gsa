@@ -31,16 +31,19 @@ def _get_client() -> AsyncOpenAI:
     return AsyncOpenAI(api_key=settings.openai_api_key)
 
 
-async def _stream_openai(messages: list[dict]) -> AsyncGenerator[str, None]:
+async def _stream_openai(messages: list[dict], max_tokens: int = 2048) -> AsyncGenerator[str, None]:
     client = _get_client()
-    async with client.chat.completions.stream(
+    stream = await client.chat.completions.create(
         model=settings.openai_model,
         messages=messages,
         temperature=0.7,
-    ) as stream:
-        async for text in stream.text_stream:
-            if text:
-                yield f"data: {json.dumps({'delta': text}, ensure_ascii=False)}\n\n"
+        max_tokens=max_tokens,
+        stream=True,
+    )
+    async for chunk in stream:
+        if chunk.choices and chunk.choices[0].delta.content:
+            text = chunk.choices[0].delta.content
+            yield f"data: {json.dumps({'delta': text}, ensure_ascii=False)}\n\n"
     yield "data: [DONE]\n\n"
 
 
@@ -113,7 +116,7 @@ async def ai_brief(body: AiBriefRequest) -> StreamingResponse:
         title = step_titles.get(sid, f"Шаг {sid}")
         steps_summary[title] = sdata.fields
 
-    brief_step = next((s for s in steps if s.id == 8), None)
+    brief_step = next((s for s in steps if s.id == 12), None)
     system_prompt = _SYSTEM_BASE
     if brief_step:
         system_prompt += "\n\n" + brief_step.ai_prompt_context
@@ -132,7 +135,7 @@ async def ai_brief(body: AiBriefRequest) -> StreamingResponse:
 
     async def stream_and_save() -> AsyncGenerator[str, None]:
         full_text = []
-        async for chunk in _stream_openai(messages):
+        async for chunk in _stream_openai(messages, max_tokens=8192):
             yield chunk
             if chunk.startswith("data: ") and chunk.strip() != "data: [DONE]":
                 try:
