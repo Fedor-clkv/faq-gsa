@@ -1,0 +1,927 @@
+[
+  {
+    "id": 1,
+    "slug": "target-site",
+    "title": "Целевой сайт",
+    "description": "Укажите URL сайта, для которого создаётся проект линкбилдинга, его нишу и основные цели кампании.",
+    "icon": "Globe",
+    "fields": [
+      {
+        "id": "target_url",
+        "label": "URL целевого сайта",
+        "type": "url",
+        "placeholder": "https://example.com",
+        "hint": "Основной домен вашего сайта без слеша в конце. GSA SER будет строить ссылки именно на этот домен.",
+        "required": true,
+        "default": null,
+        "options": []
+      },
+      {
+        "id": "niche",
+        "label": "Ниша / тематика сайта",
+        "type": "text",
+        "placeholder": "Например: интернет-маркетинг, фитнес, e-commerce",
+        "hint": "Укажите тематику сайта — это поможет AI подобрать подходящие платформы и контент-стратегию.",
+        "required": true,
+        "default": null,
+        "options": []
+      },
+      {
+        "id": "campaign_goal",
+        "label": "Цель кампании",
+        "type": "select",
+        "placeholder": "",
+        "hint": "Выберите основную цель: быстрый рост ссылочной массы (Tier 1 / Tier 2), увеличение DR или поддержание естественного ссылочного профиля.",
+        "required": true,
+        "default": "tier2",
+        "options": [
+          { "value": "tier1", "label": "Tier 1 — прямые ссылки на сайт" },
+          { "value": "tier2", "label": "Tier 2 — усиление существующих ссылок" },
+          { "value": "tier3", "label": "Tier 3 — массовый спам-буфер" },
+          { "value": "diversity", "label": "Диверсификация ссылочного профиля" }
+        ]
+      },
+      {
+        "id": "money_pages",
+        "label": "Деньговые страницы (Money Pages)",
+        "type": "textarea",
+        "placeholder": "https://example.com/page1\nhttps://example.com/page2",
+        "hint": "Введите URL страниц, которые должны получить наибольший вес. Каждый URL с новой строки.",
+        "required": false,
+        "default": null,
+        "options": []
+      }
+    ],
+    "ai_prompt_context": "Ты эксперт по GSA Search Engine Ranker и SEO линкбилдингу. Пользователь настраивает проект на шаге 1 — «Целевой сайт». Помоги разобраться с выбором цели кампании, правильным указанием URL и выбором деньговых страниц. Давай конкретные советы, избегай воды."
+  },
+  {
+    "id": 2,
+    "slug": "keywords-anchors",
+    "title": "Ключевые слова и анкоры",
+    "description": "Настройте семантическое ядро и стратегию анкорных текстов для естественного ссылочного профиля.",
+    "icon": "Key",
+    "fields": [
+      {
+        "id": "keywords",
+        "label": "Ключевые слова",
+        "type": "textarea",
+        "placeholder": "купить ноутбук\nлучшие ноутбуки 2024\nноутбук для работы",
+        "hint": "Введите ключевые фразы — по одной на строку. GSA SER будет использовать их для генерации анкоров и поиска целевых платформ.",
+        "required": true,
+        "default": null,
+        "options": []
+      },
+      {
+        "id": "anchor_ratio_exact",
+        "label": "Точные анкоры (%)",
+        "type": "range",
+        "placeholder": "",
+        "hint": "Процент ссылок с точным вхождением ключевого слова. Рекомендуется не более 5–10% для Tier 1.",
+        "required": false,
+        "default": 5,
+        "options": [],
+        "min": 0,
+        "max": 100,
+        "step": 1
+      },
+      {
+        "id": "anchor_ratio_partial",
+        "label": "Частичное вхождение (%)",
+        "type": "range",
+        "placeholder": "",
+        "hint": "Ссылки с частичным вхождением ключа (напр. «ноутбуки онлайн купить»). Оптимально 20–30%.",
+        "required": false,
+        "default": 25,
+        "options": [],
+        "min": 0,
+        "max": 100,
+        "step": 1
+      },
+      {
+        "id": "anchor_ratio_branded",
+        "label": "Брендовые анкоры (%)",
+        "type": "range",
+        "placeholder": "",
+        "hint": "Анкоры с названием бренда или домена. Рекомендуется 20–30%.",
+        "required": false,
+        "default": 20,
+        "options": [],
+        "min": 0,
+        "max": 100,
+        "step": 1
+      },
+      {
+        "id": "anchor_ratio_naked",
+        "label": "Голый URL (%)",
+        "type": "range",
+        "placeholder": "",
+        "hint": "Просто URL без текста анкора (https://example.com). Рекомендуется 20–30%.",
+        "required": false,
+        "default": 25,
+        "options": [],
+        "min": 0,
+        "max": 100,
+        "step": 1
+      },
+      {
+        "id": "anchor_ratio_generic",
+        "label": "Дженерики (%)",
+        "type": "range",
+        "placeholder": "",
+        "hint": "Общие анкоры: «здесь», «тут», «читать далее», «click here» и т.д.",
+        "required": false,
+        "default": 25,
+        "options": [],
+        "min": 0,
+        "max": 100,
+        "step": 1
+      },
+      {
+        "id": "custom_anchors",
+        "label": "Пользовательские анкоры",
+        "type": "tags",
+        "placeholder": "Добавьте анкор и нажмите Enter",
+        "hint": "Конкретные анкорные тексты, которые будут использоваться в ротации.",
+        "required": false,
+        "default": null,
+        "options": []
+      }
+    ],
+    "ai_prompt_context": "Ты эксперт по GSA SER и SEO. Пользователь настраивает ключевые слова и анкоры на шаге 2. Объясни правильное распределение анкорных текстов для безопасного линкбилдинга, помоги подобрать стратегию в зависимости от цели кампании (Tier 1/2/3). Учти данные из предыдущих шагов."
+  },
+  {
+    "id": 3,
+    "slug": "platforms",
+    "title": "Платформы",
+    "description": "Выберите типы платформ, на которых GSA SER будет размещать ссылки. Каждый тип имеет свою скорость и качество.",
+    "icon": "Server",
+    "fields": [
+      {
+        "id": "platforms",
+        "label": "Типы платформ",
+        "type": "multiselect",
+        "placeholder": "",
+        "hint": "Выберите движки для размещения ссылок. Для Tier 1 рекомендуются только высококачественные платформы (Web 2.0, Contextual). Для Tier 2/3 можно добавить форумы, комментарии, соцсети.",
+        "required": true,
+        "default": ["web20", "contextual"],
+        "options": [
+          { "value": "web20", "label": "Web 2.0 (Blogger, WordPress.com)" },
+          { "value": "contextual", "label": "Contextual / Article (высокое качество)" },
+          { "value": "wiki", "label": "Wiki (MediaWiki)" },
+          { "value": "forum_profiles", "label": "Forum Profiles" },
+          { "value": "forum_posts", "label": "Forum Posts / Threads" },
+          { "value": "blog_comments", "label": "Blog Comments" },
+          { "value": "social_networks", "label": "Social Networks" },
+          { "value": "social_bookmarks", "label": "Social Bookmarks" },
+          { "value": "directory", "label": "Web Directories" },
+          { "value": "rss", "label": "RSS Aggregators" },
+          { "value": "image_shares", "label": "Image Sharing" },
+          { "value": "video_shares", "label": "Video Sharing" },
+          { "value": "microblog", "label": "Microblogging" },
+          { "value": "guestbook", "label": "Guestbooks" },
+          { "value": "indexer", "label": "Indexers" }
+        ]
+      },
+      {
+        "id": "use_own_footprints",
+        "label": "Использовать собственные отпечатки (footprints)",
+        "type": "toggle",
+        "placeholder": "",
+        "hint": "Включите, если хотите использовать кастомные footprint-листы для поиска движков. По умолчанию GSA SER использует встроенные списки.",
+        "required": false,
+        "default": false,
+        "options": []
+      },
+      {
+        "id": "min_pr",
+        "label": "Минимальный PR / DA сайта",
+        "type": "number",
+        "placeholder": "0",
+        "hint": "Фильтруйте платформы по минимальному PageRank или Domain Authority. Для Tier 1 рекомендуется PR ≥ 1.",
+        "required": false,
+        "default": 0,
+        "options": [],
+        "min": 0,
+        "max": 10,
+        "step": 1
+      },
+      {
+        "id": "verified_only",
+        "label": "Только верифицированные платформы",
+        "type": "toggle",
+        "placeholder": "",
+        "hint": "Использовать только сайты из ранее верифицированных баз. Уменьшает скорость, но повышает качество.",
+        "required": false,
+        "default": false,
+        "options": []
+      }
+    ],
+    "ai_prompt_context": "Ты эксперт по GSA SER. Пользователь выбирает платформы на шаге 3. Дай рекомендации по набору платформ в зависимости от Tier кампании. Объясни разницу между типами движков по качеству и скорости. Предупреди о рисках использования низкокачественных платформ для Tier 1."
+  },
+  {
+    "id": 4,
+    "slug": "content",
+    "title": "Контент",
+    "description": "Настройте стратегию контента: источники статей, спиннинг, уникальность и параметры публикаций.",
+    "icon": "FileText",
+    "fields": [
+      {
+        "id": "content_source",
+        "label": "Источник контента",
+        "type": "select",
+        "placeholder": "",
+        "hint": "Выберите способ получения контента для публикаций. Свой контент — лучшее качество. AI-генерация — баланс качества и скорости.",
+        "required": true,
+        "default": "ai",
+        "options": [
+          { "value": "ai", "label": "AI-генерация (OpenAI / встроенный)" },
+          { "value": "spinner", "label": "Спиннинг встроенным спиннером" },
+          { "value": "own_articles", "label": "Свои статьи (загрузить файл)" },
+          { "value": "scraped", "label": "Скрейпинг с тематических сайтов" },
+          { "value": "mixed", "label": "Смешанный (свои + AI)" }
+        ]
+      },
+      {
+        "id": "article_count",
+        "label": "Количество уникальных статей",
+        "type": "number",
+        "placeholder": "50",
+        "hint": "Сколько уникальных статей подготовить для ротации. Рекомендуется не менее 30–50 для нормальной работы.",
+        "required": false,
+        "default": 50,
+        "options": [],
+        "min": 1,
+        "max": 10000,
+        "step": 1
+      },
+      {
+        "id": "article_language",
+        "label": "Язык статей",
+        "type": "select",
+        "placeholder": "",
+        "hint": "Выберите основной язык контента. Должен соответствовать языку целевого сайта.",
+        "required": false,
+        "default": "ru",
+        "options": [
+          { "value": "ru", "label": "Русский" },
+          { "value": "en", "label": "English" },
+          { "value": "de", "label": "Deutsch" },
+          { "value": "es", "label": "Español" },
+          { "value": "fr", "label": "Français" }
+        ]
+      },
+      {
+        "id": "spin_level",
+        "label": "Уровень спиннинга",
+        "type": "select",
+        "placeholder": "",
+        "hint": "Насколько агрессивно перефразировать статьи. Высокий уровень даёт больше уникальности, но может снизить читаемость.",
+        "required": false,
+        "default": "medium",
+        "options": [
+          { "value": "none", "label": "Без спиннинга" },
+          { "value": "low", "label": "Низкий (замена синонимов)" },
+          { "value": "medium", "label": "Средний (перефразирование предложений)" },
+          { "value": "high", "label": "Высокий (реструктуризация параграфов)" }
+        ]
+      },
+      {
+        "id": "use_spintax",
+        "label": "Использовать Spintax-формат",
+        "type": "toggle",
+        "placeholder": "",
+        "hint": "Spintax ({вариант1|вариант2}) позволяет получить тысячи уникальных версий из одной статьи.",
+        "required": false,
+        "default": true,
+        "options": []
+      },
+      {
+        "id": "min_word_count",
+        "label": "Минимальная длина статьи (слов)",
+        "type": "number",
+        "placeholder": "300",
+        "hint": "Статьи короче этого значения не будут использоваться. Рекомендуется 200–500 слов.",
+        "required": false,
+        "default": 300,
+        "options": [],
+        "min": 50,
+        "max": 5000,
+        "step": 50
+      }
+    ],
+    "ai_prompt_context": "Ты эксперт по контент-стратегии в GSA SER. Пользователь настраивает контент на шаге 4. Объясни разницу между источниками контента, дай рекомендации по уровню спиннинга в зависимости от Tier кампании. Помоги выбрать оптимальные параметры для баланса уникальности и скорости."
+  },
+  {
+    "id": 5,
+    "slug": "proxies-captcha",
+    "title": "Прокси и Капча",
+    "description": "Настройте использование прокси-серверов и сервисов решения капчи для стабильной работы GSA SER.",
+    "icon": "Shield",
+    "fields": [
+      {
+        "id": "proxy_type",
+        "label": "Тип прокси",
+        "type": "select",
+        "placeholder": "",
+        "hint": "Private прокси — быстрее и надёжнее, но дороже. Public / Semi-dedicated подходят для Tier 2/3. Rotating прокси лучше всего для высокоскоростных кампаний.",
+        "required": true,
+        "default": "private",
+        "options": [
+          { "value": "none", "label": "Без прокси (прямое подключение)" },
+          { "value": "public", "label": "Публичные прокси (бесплатно, ненадёжно)" },
+          { "value": "private", "label": "Приватные прокси (рекомендуется)" },
+          { "value": "semi", "label": "Semi-dedicated прокси" },
+          { "value": "rotating", "label": "Rotating / Backconnect прокси" },
+          { "value": "residential", "label": "Residential прокси (максимум доверия)" }
+        ]
+      },
+      {
+        "id": "proxy_count",
+        "label": "Количество прокси",
+        "type": "number",
+        "placeholder": "10",
+        "hint": "Рекомендуется 1 прокси на каждые 50–100 потоков. Для 500 потоков нужно 5–10 прокси.",
+        "required": false,
+        "default": 10,
+        "options": [],
+        "min": 1,
+        "max": 1000,
+        "step": 1
+      },
+      {
+        "id": "proxy_test_timeout",
+        "label": "Таймаут проверки прокси (сек)",
+        "type": "number",
+        "placeholder": "10",
+        "hint": "Прокси с временем ответа выше этого значения будут считаться нерабочими.",
+        "required": false,
+        "default": 10,
+        "options": [],
+        "min": 1,
+        "max": 60,
+        "step": 1
+      },
+      {
+        "id": "captcha_service",
+        "label": "Сервис решения капчи",
+        "type": "select",
+        "placeholder": "",
+        "hint": "2captcha и Anti-Captcha — самые популярные сервисы. DeathByCaptcha дешевле, но медленнее. GSA Captcha Breaker — локальное решение без API.",
+        "required": true,
+        "default": "2captcha",
+        "options": [
+          { "value": "none", "label": "Без решения капчи (медленнее)" },
+          { "value": "2captcha", "label": "2Captcha (рекомендуется)" },
+          { "value": "anticaptcha", "label": "Anti-Captcha" },
+          { "value": "deathbycaptcha", "label": "DeathByCaptcha" },
+          { "value": "capsolver", "label": "CapSolver" },
+          { "value": "gcb", "label": "GSA Captcha Breaker (локально)" }
+        ]
+      },
+      {
+        "id": "captcha_api_key",
+        "label": "API ключ сервиса капчи",
+        "type": "text",
+        "placeholder": "Ваш API ключ",
+        "hint": "Вставьте API ключ выбранного сервиса. Хранится только в вашей сессии.",
+        "required": false,
+        "default": null,
+        "options": []
+      },
+      {
+        "id": "use_sitekey_bypass",
+        "label": "Обход reCAPTCHA v2/v3",
+        "type": "toggle",
+        "placeholder": "",
+        "hint": "Включите поддержку решения reCAPTCHA через выбранный сервис. Влияет на стоимость и скорость.",
+        "required": false,
+        "default": true,
+        "options": []
+      }
+    ],
+    "ai_prompt_context": "Ты эксперт по настройке прокси и капча-сервисов в GSA SER. Пользователь на шаге 5 выбирает прокси и способ решения капчи. Дай рекомендации по типу прокси в зависимости от Tier кампании и бюджета. Объясни важность капча-сервисов для скорости работы проекта."
+  },
+  {
+    "id": 6,
+    "slug": "schedule-limits",
+    "title": "Расписание и Лимиты",
+    "description": "Задайте скорость, потоки и время работы проекта для контроля нагрузки и безопасности.",
+    "icon": "Clock",
+    "fields": [
+      {
+        "id": "threads",
+        "label": "Количество потоков",
+        "type": "number",
+        "placeholder": "50",
+        "hint": "Количество параллельных потоков GSA SER. Для VPS с 2 GB RAM рекомендуется 50–100. Для 4 GB — до 200 потоков.",
+        "required": false,
+        "default": 50,
+        "options": [],
+        "min": 1,
+        "max": 2000,
+        "step": 10
+      },
+      {
+        "id": "submissions_per_day",
+        "label": "Отправок в сутки (лимит)",
+        "type": "number",
+        "placeholder": "1000",
+        "hint": "Максимальное количество попыток регистрации/размещения в сутки. 0 = без ограничений. Рекомендуется лимит для Tier 1.",
+        "required": false,
+        "default": 1000,
+        "options": [],
+        "min": 0,
+        "max": 100000,
+        "step": 100
+      },
+      {
+        "id": "verified_per_day",
+        "label": "Верифицированных ссылок в сутки (лимит)",
+        "type": "number",
+        "placeholder": "100",
+        "hint": "Лимит верифицированных (подтверждённых живых) ссылок в день. Для Tier 1 рекомендуется 20–50/день, Tier 2 — до 500.",
+        "required": false,
+        "default": 100,
+        "options": [],
+        "min": 0,
+        "max": 10000,
+        "step": 10
+      },
+      {
+        "id": "schedule_enabled",
+        "label": "Использовать расписание",
+        "type": "toggle",
+        "placeholder": "",
+        "hint": "Запускать проект только в определённые часы. Полезно для имитации естественного прироста ссылок.",
+        "required": false,
+        "default": false,
+        "options": []
+      },
+      {
+        "id": "schedule_hours",
+        "label": "Часы работы",
+        "type": "text",
+        "placeholder": "09:00-23:00",
+        "hint": "Временной интервал работы проекта в формате ЧЧ:ММ-ЧЧ:ММ. Например: 08:00-22:00.",
+        "required": false,
+        "default": "08:00-22:00",
+        "options": []
+      },
+      {
+        "id": "pause_between_posts",
+        "label": "Пауза между постами (сек)",
+        "type": "number",
+        "placeholder": "0",
+        "hint": "Задержка в секундах между отправками. Помогает имитировать человеческое поведение. 0 = максимальная скорость.",
+        "required": false,
+        "default": 0,
+        "options": [],
+        "min": 0,
+        "max": 300,
+        "step": 1
+      },
+      {
+        "id": "stop_on_verified",
+        "label": "Останавливаться после достижения лимита",
+        "type": "toggle",
+        "placeholder": "",
+        "hint": "Автоматически ставить проект на паузу, когда достигнут дневной лимит верифицированных ссылок.",
+        "required": false,
+        "default": true,
+        "options": []
+      }
+    ],
+    "ai_prompt_context": "Ты эксперт по настройке производительности GSA SER. Пользователь настраивает потоки и лимиты на шаге 6. Дай рекомендации по количеству потоков в зависимости от ресурсов VPS. Объясни важность лимитов для безопасности Tier 1. Помоги настроить расписание для естественного прироста."
+  },
+  {
+    "id": 7,
+    "slug": "verification",
+    "title": "Верификация",
+    "description": "Настройте верификацию размещённых ссылок и управление email-аккаунтами для регистраций.",
+    "icon": "CheckCircle",
+    "fields": [
+      {
+        "id": "verify_links",
+        "label": "Верифицировать размещённые ссылки",
+        "type": "toggle",
+        "placeholder": "",
+        "hint": "GSA SER будет повторно проверять размещённые ссылки. Рекомендуется включить — позволяет точно знать, сколько ссылок живых.",
+        "required": false,
+        "default": true,
+        "options": []
+      },
+      {
+        "id": "verify_interval",
+        "label": "Интервал верификации (дней)",
+        "type": "number",
+        "placeholder": "7",
+        "hint": "Как часто перепроверять ссылки. Рекомендуется каждые 7–14 дней.",
+        "required": false,
+        "default": 7,
+        "options": [],
+        "min": 1,
+        "max": 90,
+        "step": 1
+      },
+      {
+        "id": "email_service",
+        "label": "Сервис email для регистраций",
+        "type": "select",
+        "placeholder": "",
+        "hint": "Электронные адреса нужны для регистрации на платформах. Catch-all домен — самый надёжный вариант.",
+        "required": true,
+        "default": "catchall",
+        "options": [
+          { "value": "catchall", "label": "Catch-All домен (рекомендуется)" },
+          { "value": "tempmail", "label": "Временная почта (автоматически)" },
+          { "value": "own_smtp", "label": "Свой SMTP / IMAP" },
+          { "value": "gmail", "label": "Gmail аккаунты" },
+          { "value": "yandex", "label": "Яндекс.Почта аккаунты" }
+        ]
+      },
+      {
+        "id": "catchall_domain",
+        "label": "Catch-all домен",
+        "type": "text",
+        "placeholder": "mail.example.com",
+        "hint": "Домен с настроенным catch-all для приёма писем активации. Самый стабильный вариант для масштабирования.",
+        "required": false,
+        "default": null,
+        "options": []
+      },
+      {
+        "id": "reuse_accounts",
+        "label": "Переиспользовать существующие аккаунты",
+        "type": "toggle",
+        "placeholder": "",
+        "hint": "Если включено — GSA SER будет логиниться в существующие аккаунты вместо создания новых. Ускоряет работу на знакомых платформах.",
+        "required": false,
+        "default": true,
+        "options": []
+      },
+      {
+        "id": "delete_unverified",
+        "label": "Удалять неверифицированные записи",
+        "type": "select",
+        "placeholder": "",
+        "hint": "Через сколько дней удалять записи, которые так и не прошли верификацию. Экономит место в базе данных.",
+        "required": false,
+        "default": "30",
+        "options": [
+          { "value": "never", "label": "Никогда" },
+          { "value": "7", "label": "Через 7 дней" },
+          { "value": "14", "label": "Через 14 дней" },
+          { "value": "30", "label": "Через 30 дней" },
+          { "value": "60", "label": "Через 60 дней" }
+        ]
+      }
+    ],
+    "ai_prompt_context": "Ты эксперт по GSA SER. Пользователь настраивает верификацию и email на шаге 7. Объясни важность верификации ссылок, плюсы catch-all домена перед временной почтой. Дай рекомендации по оптимальному интервалу верификации и управлению аккаунтами."
+  },
+  {
+    "id": 8,
+    "slug": "quality-filters",
+    "title": "Фильтры качества",
+    "description": "Настройте фильтры для отбора сайтов по качественным метрикам: PR, DA, OBL и индексация в Google.",
+    "icon": "Filter",
+    "fields": [
+      {
+        "id": "min_domain_authority",
+        "label": "Минимальный Domain Authority (DA)",
+        "type": "range",
+        "placeholder": "",
+        "hint": "Фильтровать сайты с DA ниже указанного значения. Для Tier 1 рекомендуется DA ≥ 10, для Tier 2/3 — 0.",
+        "required": false,
+        "default": 0,
+        "options": [],
+        "min": 0,
+        "max": 100,
+        "step": 5
+      },
+      {
+        "id": "min_page_rank",
+        "label": "Минимальный PageRank (PR)",
+        "type": "range",
+        "placeholder": "",
+        "hint": "Исторический Google PageRank (0–10). Большинство современных сайтов имеют PR 0–3.",
+        "required": false,
+        "default": 0,
+        "options": [],
+        "min": 0,
+        "max": 10,
+        "step": 1
+      },
+      {
+        "id": "max_obl",
+        "label": "Максимальное количество исходящих ссылок (OBL)",
+        "type": "number",
+        "placeholder": "100",
+        "hint": "Сайты с очень большим количеством исходящих ссылок (OBL > 500) передают мало веса. Рекомендуется ограничить до 100–200.",
+        "required": false,
+        "default": 100,
+        "options": [],
+        "min": 0,
+        "max": 10000,
+        "step": 10
+      },
+      {
+        "id": "require_google_index",
+        "label": "Только проиндексированные в Google сайты",
+        "type": "toggle",
+        "placeholder": "",
+        "hint": "Проверять наличие сайта в индексе Google перед размещением. Значительно снижает скорость, но повышает качество.",
+        "required": false,
+        "default": false,
+        "options": []
+      },
+      {
+        "id": "filter_sandbox",
+        "label": "Фильтровать сайты-«пустышки»",
+        "type": "toggle",
+        "placeholder": "",
+        "hint": "Пропускать сайты с нулевым контентом (placeholder pages, припаркованные домены). Рекомендуется включить.",
+        "required": false,
+        "default": true,
+        "options": []
+      },
+      {
+        "id": "min_alexa_rank",
+        "label": "Максимальный Alexa Rank (чем меньше — тем лучше)",
+        "type": "number",
+        "placeholder": "0",
+        "hint": "0 = без фильтра. Например, значение 1000000 отфильтрует совсем неизвестные сайты. Используйте осторожно — сильно ограничивает базу.",
+        "required": false,
+        "default": 0,
+        "options": [],
+        "min": 0,
+        "max": 100000000,
+        "step": 100000
+      }
+    ],
+    "ai_prompt_context": "Ты эксперт по GSA SER. Пользователь настраивает фильтры качества сайтов на шаге 8. Объясни разницу между DA/PR/OBL метриками. Дай рекомендации по настройке фильтров для разных Tier кампаний. Предупреди о компромиссе между качеством и скоростью."
+  },
+  {
+    "id": 9,
+    "slug": "site-lists",
+    "title": "Списки сайтов",
+    "description": "Управляйте списками целевых платформ: импортируйте готовые SER-листы, задайте исключения и ограничения.",
+    "icon": "List",
+    "fields": [
+      {
+        "id": "use_global_site_lists",
+        "label": "Использовать глобальные списки сайтов",
+        "type": "toggle",
+        "placeholder": "",
+        "hint": "Подключить глобальные верифицированные базы из GSA SER. Это значительно ускоряет работу на известных платформах.",
+        "required": false,
+        "default": true,
+        "options": []
+      },
+      {
+        "id": "import_verified_list",
+        "label": "Импортировать верифицированный список",
+        "type": "select",
+        "placeholder": "",
+        "hint": "Выберите источник готового SER-листа. Покупные листы содержат тысячи проверенных платформ для быстрого старта.",
+        "required": false,
+        "default": "none",
+        "options": [
+          { "value": "none", "label": "Не использовать" },
+          { "value": "ranker-creatives", "label": "Ranker Creatives (платный)" },
+          { "value": "seo-verified", "label": "SEO Verified Lists (платный)" },
+          { "value": "own", "label": "Собственный список (загрузить URL)" },
+          { "value": "shared", "label": "Общий список проекта" }
+        ]
+      },
+      {
+        "id": "exclude_urls",
+        "label": "Список исключений (Exclude List)",
+        "type": "textarea",
+        "placeholder": "competitor.com\nbadsite.net",
+        "hint": "Домены, на которых НЕ нужно размещать ссылки. Один домен на строку. Полезно для исключения конкурентов или сайтов с плохой репутацией.",
+        "required": false,
+        "default": null,
+        "options": []
+      },
+      {
+        "id": "only_new_sites",
+        "label": "Только новые сайты (не использованные ранее)",
+        "type": "toggle",
+        "placeholder": "",
+        "hint": "Не повторять сайты, которые уже использовались в других проектах. Повышает разнообразие ссылочного профиля.",
+        "required": false,
+        "default": false,
+        "options": []
+      },
+      {
+        "id": "max_links_per_domain",
+        "label": "Максимум ссылок с одного домена",
+        "type": "number",
+        "placeholder": "1",
+        "hint": "Лимит ссылок с одного корневого домена. Для Tier 1 рекомендуется 1–3, для Tier 2 — без ограничений.",
+        "required": false,
+        "default": 1,
+        "options": [],
+        "min": 0,
+        "max": 100,
+        "step": 1
+      },
+      {
+        "id": "target_countries",
+        "label": "Целевые страны (геотаргетинг)",
+        "type": "tags",
+        "placeholder": "Добавьте код страны (RU, US, DE...)",
+        "hint": "Если указаны страны — GSA SER будет предпочитать сайты из этих регионов. Оставьте пустым для работы по всему миру.",
+        "required": false,
+        "default": null,
+        "options": []
+      }
+    ],
+    "ai_prompt_context": "Ты эксперт по GSA SER. Пользователь настраивает списки сайтов на шаге 9. Объясни ценность верифицированных SER-листов, важность exclude-листов. Дай рекомендации по лимиту ссылок с домена для разных Tier кампаний."
+  },
+  {
+    "id": 10,
+    "slug": "integrations",
+    "title": "Интеграции",
+    "description": "Подключите дополнительные инструменты GSA и сторонние сервисы для максимальной эффективности кампании.",
+    "icon": "Plug",
+    "fields": [
+      {
+        "id": "use_captcha_breaker",
+        "label": "GSA Captcha Breaker (локальное решение)",
+        "type": "toggle",
+        "placeholder": "",
+        "hint": "Локальный инструмент для автоматического решения капчи без API. Требует отдельной установки GSA Captcha Breaker. Бесплатно, но менее точно чем облачные сервисы.",
+        "required": false,
+        "default": false,
+        "options": []
+      },
+      {
+        "id": "use_gsa_indexer",
+        "label": "GSA SEO Indexer",
+        "type": "toggle",
+        "placeholder": "",
+        "hint": "Автоматически отправляет созданные ссылки на индексацию. Значительно ускоряет появление ссылок в Google. Рекомендуется для Tier 1.",
+        "required": false,
+        "default": false,
+        "options": []
+      },
+      {
+        "id": "use_kontent_machine",
+        "label": "Kontent Machine (генератор контента)",
+        "type": "toggle",
+        "placeholder": "",
+        "hint": "Интеграция с Kontent Machine для генерации уникальных статей с помощью спиннинга. Требует отдельной лицензии.",
+        "required": false,
+        "default": false,
+        "options": []
+      },
+      {
+        "id": "use_article_builder",
+        "label": "Article Builder",
+        "type": "toggle",
+        "placeholder": "",
+        "hint": "Подключение к сервису Article Builder для получения готовых уникальных статей по ниши. Платный API.",
+        "required": false,
+        "default": false,
+        "options": []
+      },
+      {
+        "id": "ping_services",
+        "label": "Сервисы пинга",
+        "type": "multiselect",
+        "placeholder": "",
+        "hint": "Сервисы для уведомления поисковых систем о новом контенте. Ускоряют индексацию размещённых ссылок.",
+        "required": false,
+        "default": ["pingomatic"],
+        "options": [
+          { "value": "pingomatic", "label": "Ping-O-Matic" },
+          { "value": "pingler", "label": "Pingler" },
+          { "value": "bulkping", "label": "Bulk Ping" },
+          { "value": "twingly", "label": "Twingly" }
+        ]
+      },
+      {
+        "id": "use_url_shortener",
+        "label": "Использовать URL-сокращатели",
+        "type": "toggle",
+        "placeholder": "",
+        "hint": "Добавлять цепочки редиректов через сокращалки (bit.ly, tinyurl) для маскировки прямых ссылок. Полезно для Tier 2/3.",
+        "required": false,
+        "default": false,
+        "options": []
+      },
+      {
+        "id": "notify_webhook",
+        "label": "Webhook уведомления (URL)",
+        "type": "url",
+        "placeholder": "https://hooks.slack.com/...",
+        "hint": "URL для отправки POST-уведомлений о достижении лимитов, ошибках или завершении работы проекта.",
+        "required": false,
+        "default": null,
+        "options": []
+      }
+    ],
+    "ai_prompt_context": "Ты эксперт по GSA SER и SEO-инструментам. Пользователь настраивает интеграции на шаге 10. Объясни ценность GSA SEO Indexer для ускорения индексации. Сравни Kontent Machine и Article Builder. Дай рекомендации по комбинированию инструментов для максимального эффекта."
+  },
+  {
+    "id": 11,
+    "slug": "advanced-settings",
+    "title": "Расширенные настройки",
+    "description": "Тонкая настройка поведения GSA SER: обработка ошибок, логирование, баннлист и дополнительные опции безопасности.",
+    "icon": "Settings2",
+    "fields": [
+      {
+        "id": "retry_failed",
+        "label": "Повторять неудачные попытки",
+        "type": "toggle",
+        "placeholder": "",
+        "hint": "GSA SER будет повторно пытаться разместить ссылки на сайтах, где возникли ошибки. Рекомендуется включить.",
+        "required": false,
+        "default": true,
+        "options": []
+      },
+      {
+        "id": "max_retries",
+        "label": "Максимальное количество повторов",
+        "type": "number",
+        "placeholder": "3",
+        "hint": "Сколько раз повторять попытку размещения при ошибке. После превышения сайт добавляется в временный бан-лист.",
+        "required": false,
+        "default": 3,
+        "options": [],
+        "min": 1,
+        "max": 10,
+        "step": 1
+      },
+      {
+        "id": "ban_duration_hours",
+        "label": "Время бана сайта (часов)",
+        "type": "number",
+        "placeholder": "24",
+        "hint": "На сколько часов исключать сайт после многократных ошибок. Затем GSA SER снова попытается работать с ним.",
+        "required": false,
+        "default": 24,
+        "options": [],
+        "min": 1,
+        "max": 720,
+        "step": 1
+      },
+      {
+        "id": "log_level",
+        "label": "Уровень логирования",
+        "type": "select",
+        "placeholder": "",
+        "hint": "Насколько подробно записывать действия в лог. «Только ошибки» — минимально, «Всё» — максимально детально (замедляет работу).",
+        "required": false,
+        "default": "normal",
+        "options": [
+          { "value": "errors_only", "label": "Только ошибки" },
+          { "value": "normal", "label": "Обычный" },
+          { "value": "verbose", "label": "Подробный" },
+          { "value": "debug", "label": "Отладочный (всё)" }
+        ]
+      },
+      {
+        "id": "randomize_order",
+        "label": "Случайный порядок обработки сайтов",
+        "type": "toggle",
+        "placeholder": "",
+        "hint": "Перемешивать очередь сайтов случайным образом. Помогает имитировать естественное поведение и избежать паттернов.",
+        "required": false,
+        "default": true,
+        "options": []
+      },
+      {
+        "id": "use_user_agents",
+        "label": "Ротация User-Agent",
+        "type": "toggle",
+        "placeholder": "",
+        "hint": "Использовать случайные User-Agent заголовки для каждого запроса. Снижает вероятность блокировки по fingerprint.",
+        "required": false,
+        "default": true,
+        "options": []
+      },
+      {
+        "id": "project_notes",
+        "label": "Заметки по проекту",
+        "type": "textarea",
+        "placeholder": "Дополнительные инструкции, пометки, особенности проекта...",
+        "hint": "Произвольные текстовые заметки, которые будут включены в итоговый бриф.",
+        "required": false,
+        "default": null,
+        "options": []
+      }
+    ],
+    "ai_prompt_context": "Ты эксперт по GSA SER. Пользователь настраивает расширенные параметры на шаге 11. Дай рекомендации по настройке повторов и банов, оптимальному уровню логирования. Объясни важность рандомизации для имитации естественного поведения."
+  },
+  {
+    "id": 12,
+    "slug": "brief",
+    "title": "Итоговый бриф",
+    "description": "Просмотрите все настройки вашего проекта GSA SER и получите AI-резюме с рекомендациями.",
+    "icon": "ClipboardList",
+    "fields": [],
+    "ai_prompt_context": "Ты эксперт-консультант по GSA Search Engine Ranker. Пользователь завершил настройку проекта. Проанализируй все введённые данные и сгенерируй структурированный бриф: 1) Сводка параметров проекта, 2) Ожидаемые результаты по срокам и объёму ссылочной массы, 3) Ключевые риски и как их митигировать, 4) Рекомендации по оптимизации настроек, 5) Чек-лист запуска проекта. Используй конкретные цифры из настроек пользователя."
+  }
+]
