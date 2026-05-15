@@ -1,0 +1,18 @@
+# Environment variables
+.env
+backend/.env
+*.env
+.env.local
+.env.production
+
+# Logs
+*.log
+logs/
+
+# Dependencies
+node_modules/
+vendor/
+
+# Other
+.DS_Store
+.env.backup
